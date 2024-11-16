@@ -1,15 +1,9 @@
 import pypub
 import concurrent.futures
-from utils import get_post_links, upload_file_to_bucket, add_formatted_text_to_cover
-from celery_app import celery_app
-from schemas import Logger, LogMessage
-from dotenv import load_dotenv
+from utils import get_post_links, add_formatted_text_to_cover
 from pypubpatch import *
 import uuid, base64
 
-load_dotenv()
-
-@celery_app.task(bind=True)
 def create_epub(self, params: dict):
     short_uuid = base64.urlsafe_b64encode(uuid.uuid1().bytes).rstrip(b'=').decode('ascii')
     logger = Logger(params, short_uuid)
@@ -75,7 +69,6 @@ def create_epub(self, params: dict):
         edited_title = epub.title.replace(" ", "_")
         file_name = f"{edited_title}_{short_uuid}.epub"
         epub.create(file_name)
-        public_url = upload_file_to_bucket(file_name, "epub-outputs")
         os.remove(file_name)
         os.remove(cover_output_path)
 
