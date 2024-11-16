@@ -13,6 +13,8 @@ def create_epub(url: str, title: str | None, cover: str | None, add_cover_text: 
     title = title or fetch_title(url)
     cover = cover or "./covers/red.png"
 
+    os.makedirs("./output", exist_ok=True)
+
     def open_ui(links):
         class LinkManager(QMainWindow):
             def __init__(self):
@@ -80,7 +82,7 @@ def create_epub(url: str, title: str | None, cover: str | None, add_cover_text: 
 
     edited_title = title.replace(" ", "_")
 
-    cover_output_path = f"{edited_title}.png"
+    cover_output_path = f"./output/{edited_title}.png"
     if add_cover_text:
         add_formatted_text_to_cover(cover, title, url, cover_output_path)
     else:
@@ -104,7 +106,7 @@ def create_epub(url: str, title: str | None, cover: str | None, add_cover_text: 
         if chapter:
             epub.add_chapter(chapter)
 
-    file_name = f"{edited_title}.epub"
+    file_name = f"./output/{edited_title}.epub"
     epub.create(file_name)
     os.remove(cover_output_path)
 
