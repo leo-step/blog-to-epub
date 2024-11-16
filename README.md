@@ -2,7 +2,7 @@
 
 ## Overview
 
-This program converts a collection of blog posts from a webpage into an epub file for offline reading. You can customize the epub's title, cover image, and more. It provides a simple UI for managing links, excluding unwanted ones, and reversing their order. The tool is perfect for saving your favorite blogs or articles in a clean and portable format.
+This program converts a collection of blog posts from a webpage into an epub file for offline reading. You can customize the epub's title, cover image, and more. It provides a simple UI for managing links, excluding unwanted ones, and reversing their order. The tool is perfect for saving your favorite blogs in a clean and portable format.
 <br />
 <br />
 <img width="1060" alt="Screenshot 2024-11-16 at 4 08 56 PM" src="https://github.com/user-attachments/assets/fff01733-b33c-442a-8212-ec39765518f3">
