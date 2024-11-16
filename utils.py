@@ -44,8 +44,8 @@ def is_image_url(url):
     image_extensions = re.compile(r'\.(jpg|jpeg|png|gif|bmp|tiff|webp|svg)$', re.IGNORECASE)
     return bool(image_extensions.search(url))
 
-def get_post_links(params):
-    soup = BeautifulSoup(requests.get(params["url"], 
+def get_post_links(url):
+    soup = BeautifulSoup(requests.get(url, 
             headers=get_request_headers()).text, features="html.parser")
 
     node_registry = defaultdict(list)
@@ -88,7 +88,7 @@ def get_post_links(params):
     for node in nodes:
         if node.link in links_set or is_image_url(node.link):
             continue
-        links.append(urljoin(params["url"], node.link))
+        links.append(urljoin(url, node.link))
         links_set.add(node.link)
 
     return links

@@ -6,7 +6,6 @@ from pypub.builder import jinja_env, copy_static, epub_dirs, copy_file, generate
 from pypub.factory import REPLACE, SUPPORTED_TAGS, HtmlElement, cast
 import urllib.parse
 from lxml import etree
-from schemas import LogMessage
 
 def is_valid_xml(xml_string):
     try:
@@ -71,11 +70,6 @@ def render_chapter(self, assign, chapter):
         if is_valid_xml(content_encoded):
             self.chapters.append((assign, chapter))
             f.write(content_encoded)
-            self.link_logger.add_message(LogMessage("success", "render", chapter.url))
-            self.update_state()
-        else:
-            self.link_logger.add_message(LogMessage("fail", "render", chapter.url))
-            self.update_state()
 
 
 def cleanup_html(self, content: bytes):
